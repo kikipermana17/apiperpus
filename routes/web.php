@@ -15,11 +15,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('book.index');
+    return view('welcome');
 });
-
-// Route::get('/', [WebbookController::class, 'index']);
-// Route::post('/', [WebbookController::class, 'store']);
-// Route::delete('/{id}', [WebbookController::class, 'destroy']);
 
 Route::resource('book', WebbookController::class);

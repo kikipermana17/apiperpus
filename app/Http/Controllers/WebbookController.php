@@ -37,6 +37,11 @@ class WebbookController extends Controller
      */
     public function store(Request $request)
     {
+        //validasi data
+        // $validated = $request->validate([
+        //     'title' => 'required',
+        //     'terbit' => 'required',
+        // ]);
         $book = new Book();
         $book->title = $request->title;
         $book->terbit = $request->terbit;
@@ -64,7 +69,8 @@ class WebbookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('book.edit', compact('book'));
     }
 
     /**
@@ -76,7 +82,20 @@ class WebbookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $book = Book::findOrFail($id);
+        // $book->title = $request->nama;
+        // $book->terbit = $request->terbit;
+        // $book->save();
+        // // Alert::success('Data successfully saved', 'Good Job')->autoclose(1500);
+        // return redirect()->route('book.index');
+        $book = Book::findOrFail($id);
+
+        $book->update([
+            'title' => $request->title,
+            'terbit' => $request->terbit,
+        ]);
+        $book->save();
+        return redirect()->route('book.index');
     }
 
     /**
